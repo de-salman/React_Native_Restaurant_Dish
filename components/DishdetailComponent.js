@@ -8,42 +8,35 @@ function RenderDish(props) {
     const dish = props.dish;
 
     if (dish != null) {
-        return(
+        return (
             <Card
                 featuredTitle={dish.name}
-                image={require('../images/uthappizza.png')}
-            >
-                <Text style={{margin:10}}>
+                image={require('../images/uthappizza.png')}>
+                <Text style={{ margin: 10 }}>
                     {dish.description}
                 </Text>
             </Card>
         );
     }
     else {
-        return (
-            <View></View>
-        )
+        return (<View></View>);
     }
 }
 
 class Dishdetail extends Component {
 
     constructor(props) {
-        super(props),
+        super(props);
         this.state = {
             dishes: DISHES
         };
     }
-    
-    static navigationOptions = {
-        title: 'Dish Details'
-    };
 
     render() {
-        const dishId = this.props.navigation.getParam('dishId','');
-        return(
+        const dishId = this.props.route.params.dishId;
+        return (
             <RenderDish dish={this.state.dishes[+dishId]} />
-        )
+        );
     }
 }
 
