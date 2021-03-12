@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { LEADERS } from '../shared/leaders';
+import { LogBox } from 'react-native';
 
 class AboutUs extends Component {
 
@@ -14,6 +15,9 @@ class AboutUs extends Component {
             };
     }
 
+    componentDidMount() {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    };
 
 
     render() {
