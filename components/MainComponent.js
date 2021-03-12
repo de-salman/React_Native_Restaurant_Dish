@@ -6,6 +6,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Menu from './MenuComponent';
 import Dishdetail from './DishdetailComponent';
 import Home from './HomeComponent';
+import ContactUs from './ContactUsComponent';
+import AboutUs from './AboutUsComponent';
 
 const MenuNavigator = createStackNavigator();
 
@@ -60,6 +62,54 @@ function HomeNavigatorScreen() {
   );
 }
 
+const ContactUsNavigator = createStackNavigator();
+
+function ContactUsNavigatorScreen() {
+  return(
+      <ContactUsNavigator.Navigator
+          initialRouteName='Contact Us'
+          screenOptions={{
+              headerStyle: {
+                  backgroundColor: "#512DA8"
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                  color: "#fff"            
+              }
+          }}
+      >
+          <ContactUsNavigator.Screen
+              name="Contact Us"
+              component={ContactUs}
+          />         
+      </ContactUsNavigator.Navigator>
+  );
+}
+
+const AboutUsNavigator = createStackNavigator();
+
+function AboutUsNavigatorScreen() {
+  return(
+      <AboutUsNavigator.Navigator
+          initialRouteName='About Us'
+          screenOptions={{
+              headerStyle: {
+                  backgroundColor: "#512DA8"
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                  color: "#fff"            
+              }
+          }}
+      >
+          <AboutUsNavigator.Screen
+              name="About Us"
+              component={AboutUs}
+          />         
+      </AboutUsNavigator.Navigator>
+  );
+}
+
 const Drawer = createDrawerNavigator();
 
 function MainNavigator() {
@@ -68,6 +118,8 @@ function MainNavigator() {
         <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" component={HomeNavigatorScreen} />
           <Drawer.Screen name="Menu" component={MenuNavigatorScreen} />
+          <Drawer.Screen name="Contact Us" component={ContactUsNavigatorScreen} />
+          <Drawer.Screen name="About Us" component={AboutUsNavigatorScreen} />
         </Drawer.Navigator>
 
     );
