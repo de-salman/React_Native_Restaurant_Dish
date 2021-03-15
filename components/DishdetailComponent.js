@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+import { LogBox } from 'react-native';
+
+const mapStateToProps = state => {
+    return {
+      dishes: state.dishes,
+      comments: state.comments
+    }
+  }
 
 function RenderDish(props) {
 
@@ -12,7 +20,7 @@ function RenderDish(props) {
         return (
             <Card
                 featuredTitle={dish.name}
-                image={require('../images/uthappizza.png')}>
+                image={{uri: baseUrl + dish.image}}>
                 <Text style={{ margin: 10 }}>
                     {dish.description}
                 </Text>
@@ -64,8 +72,6 @@ class Dishdetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dishes: DISHES,
-            comments: COMMENTS,
             favorites: []
         };
     }
@@ -73,19 +79,24 @@ class Dishdetail extends Component {
         this.setState({favorites: this.state.favorites.concat(dishId)});
     }
 
+    componentDidMount() {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    };
+
     render() {
+
         const dishId = this.props.route.params.dishId;
         
         return (
-            <SafeAreaView style={{flex: 1}}>
-                <RenderDish dish={this.state.dishes[+dishId]}
+            <ScrollView style={{flex: 1}}>
+                <RenderDish dish={this.props.dishes.dishes[+dishId]}
                     favorite={this.state.favorites.some(el => el === dishId)}
                     onPress={() => this.markFavorite(dishId)} 
                     />
-                <RenderComments comments={this.state.comments.filter((comment) => comment.dishId === dishId)} />
-            </SafeAreaView>
+                <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
+            </ScrollView>
         );
     }
 }
 
-export default Dishdetail;
+export default connect(mapStateToProps)(Dishdetail);

@@ -3,17 +3,19 @@ import { ScrollView, Text } from 'react-native';
 import { Card } from 'react-native-elements';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { LEADERS } from '../shared/leaders';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 import { LogBox } from 'react-native';
+
+const mapStateToProps = state => {
+    return {
+      leaders: state.leaders
+    }
+  }
 
 class AboutUs extends Component {
 
-    constructor(props) {
-        super(props),
-            this.state = {
-                leaders: LEADERS
-            };
-    }
+    
 
     componentDidMount() {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -31,7 +33,7 @@ class AboutUs extends Component {
                     title={item.name}
                     subtitle={item.description}
                     hideChevron={true}
-                    leftAvatar={{ source: require('../images/alberto.png') }}
+                    leftAvatar={{source: {uri: baseUrl + item.image}}}
                 />
 
             );
@@ -53,7 +55,7 @@ class AboutUs extends Component {
                     title="Corprate Leadership"
                 >
                     <FlatList
-                        data={this.state.leaders}
+                        data={this.props.leaders.leaders}
                         renderItem={renderLeaderItem}
                         keyExtractor={item => item.id.toString()}
                     />
@@ -65,4 +67,4 @@ class AboutUs extends Component {
 
 }
 
-export default AboutUs;
+export default connect(mapStateToProps)(AboutUs);
