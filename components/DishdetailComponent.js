@@ -73,7 +73,7 @@ function RenderComments(props) {
     );
 }
 
-class Dishdetail extends Component {
+class DishDetail extends Component {
 
     markFavorite(dishId) {
         this.props.postFavorite(dishId);

@@ -10,10 +10,12 @@ import Menu from './MenuComponent';
 import DishDetail from './DishdetailComponent';
 import Contact from './ContactUsComponent';
 import Constants from 'expo-constants';
+import Reservation from './ReservationComponent';
 const HomeNavigator = createStackNavigator();
 const AboutNavigator = createStackNavigator();
 const MenuNavigator = createStackNavigator();
 const ContactNavigator = createStackNavigator();
+const ReservationNavigator = createStackNavigator();
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
@@ -181,6 +183,31 @@ function MenuNavigatorScreen({ navigation }) {
     );
 }
 
+function ReservationNavigatorScreen({ navigation }) {
+    return (
+        <ReservationNavigator.Navigator
+            initialRouteName='Reserve Table'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"
+                }
+            }}
+        >
+            <ReservationNavigator.Screen
+                name="Reserve Table"
+                component={Reservation}
+                options={{
+                    headerLeft: () => <StackNavigatorIcon navigation={navigation} />
+                }}
+            />
+        </ReservationNavigator.Navigator>
+    );
+}
+
 function MainDrawerScreen() {
     return (
         <MainDrawerNavigator.Navigator
@@ -218,9 +245,18 @@ function MainDrawerScreen() {
                     drawerIcon: () => <DrawerNavigatorIcon name='address-card' size={22} />
                 }}
             />
+            <MainDrawerNavigator.Screen
+                name="Reserve Table"
+                component={ReservationNavigatorScreen}
+                options={{
+                    drawerIcon: () => <DrawerNavigatorIcon name='cutlery' size={24} />
+                }}
+            />
         </MainDrawerNavigator.Navigator>
     )
 }
+
+
 
 class Main extends Component {
 
