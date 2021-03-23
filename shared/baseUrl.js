@@ -1,2 +1,2 @@
-export const baseUrl = "http://192.168.43.78:3001/";
-{ /* json-server --watch db.json --host 192.168.43.178 -p 3001 -d 2000 */}
+export const baseUrl = "http://172.20.10.4:3001/";
+{ /* json-server --watch db.json --host 172.20.10.4 -p 3001 -d 2000 */}

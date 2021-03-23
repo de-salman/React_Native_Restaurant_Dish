@@ -11,7 +11,9 @@ import DishDetail from './DishdetailComponent';
 import Contact from './ContactUsComponent';
 import Constants from 'expo-constants';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 const HomeNavigator = createStackNavigator();
+const FavoritesNavigator = createStackNavigator();
 const AboutNavigator = createStackNavigator();
 const MenuNavigator = createStackNavigator();
 const ContactNavigator = createStackNavigator();
@@ -208,6 +210,38 @@ function ReservationNavigatorScreen({ navigation }) {
     );
 }
 
+function FavoritesNavigatorScreen({ navigation }) {
+    return (
+        <FavoritesNavigator.Navigator
+            initialRouteName='Favorites'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTintColor: "#fff",
+                headerTitleStyle: {
+                    color: "#fff"
+                }
+            }}
+        >
+            <FavoritesNavigator.Screen
+                name="Favorites"
+                component={Favorites}
+                options={{
+                    headerLeft: () => <StackNavigatorIcon navigation={navigation} />
+                }}
+            />
+            <FavoritesNavigator.Screen
+                name="Dishdetail"
+                component={DishDetail}
+                options={{ headerTitle: "Dish Detail" }}
+            />
+        </FavoritesNavigator.Navigator>
+    );
+}
+
+
+
 function MainDrawerScreen() {
     return (
         <MainDrawerNavigator.Navigator
@@ -250,6 +284,13 @@ function MainDrawerScreen() {
                 component={ReservationNavigatorScreen}
                 options={{
                     drawerIcon: () => <DrawerNavigatorIcon name='cutlery' size={24} />
+                }}
+            />
+            <MainDrawerNavigator.Screen
+                name="Favorites"
+                component={FavoritesNavigatorScreen}
+                options={{
+                    drawerIcon: () => <DrawerNavigatorIcon name='heart' size={24} />
                 }}
             />
         </MainDrawerNavigator.Navigator>
