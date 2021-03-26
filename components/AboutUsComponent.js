@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { LogBox } from 'react-native';
 import { Loading } from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -43,6 +44,7 @@ class AboutUs extends Component {
         if (this.props.leaders.isLoading) {
             return(
                 <ScrollView>
+                    <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
                     <Card
                         title="Our History"
                     >
@@ -54,12 +56,14 @@ class AboutUs extends Component {
                         title='Corporate Leadership'>
                         <Loading />
                     </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
         else if (this.props.leaders.errMess) {
             return(
                 <ScrollView>
+                    <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
                     <Card
                         title="Our History"
                     >
@@ -71,6 +75,7 @@ class AboutUs extends Component {
                         title='Corporate Leadership'>
                         <Text>{this.props.leaders.errMess}</Text>
                     </Card>
+                    </Animatable.View>
                 </ScrollView>
             );
         }
@@ -78,7 +83,7 @@ class AboutUs extends Component {
             return (
 
                 <ScrollView>
-    
+                    <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
                     <Card
                         title="Our History"
                     >
@@ -95,6 +100,7 @@ class AboutUs extends Component {
                             keyExtractor={item => item.id.toString()}
                         />
                     </Card>
+                    </Animatable.View>
                 </ScrollView>
     
             );
