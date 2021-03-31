@@ -5,7 +5,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-community/picker';
 import Moment from 'moment';
 import * as Animatable from 'react-native-animatable';
-import { Permissions, Notifications } from 'expo';
+import * as Notifications from 'expo-notifications'
+import * as Permissions from 'expo-permissions';
 
 class Reservation extends Component {
 

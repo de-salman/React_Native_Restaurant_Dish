@@ -18,6 +18,7 @@ const AboutNavigator = createStackNavigator();
 const MenuNavigator = createStackNavigator();
 const ContactNavigator = createStackNavigator();
 const ReservationNavigator = createStackNavigator();
+const LoginNavigator = createStackNavigator();
 import Login from './LoginComponent';
 import { connect } from 'react-redux';
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
